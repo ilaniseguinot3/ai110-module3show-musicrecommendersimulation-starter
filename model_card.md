@@ -21,16 +21,9 @@ Prompts:
 
 ## 3. How the Model Works  
 
-Explain your scoring approach in simple language.  
+This recommender is a simple content-based system. It looks at the features of each song, such as genre, mood, energy, and tempo, and compares them with the preferences stored in a user profile. If a user tends to like songs that are calm, upbeat, and pop-oriented, the model gives higher scores to songs with similar qualities.
 
-Prompts:  
-
-- What features of each song are used (genre, energy, mood, etc.)  
-- What user preferences are considered  
-- How does the model turn those into a score  
-- What changes did you make from the starter logic  
-
-Avoid code here. Pretend you are explaining the idea to a friend who does not program.
+This is similar to the content-based side of how Spotify or YouTube recommend music, but it is simpler than the full systems those companies use. In real streaming platforms, collaborative filtering is also important: it studies patterns across many users, such as the fact that people who liked one set of songs often also liked another. Content-based filtering, on the other hand, relies more on the actual properties of the songs themselves. Both methods have strengths and weaknesses. Collaborative filtering can surface surprising recommendations, but it may struggle with new songs or users. Content-based filtering works well for new items, but it can be narrower and more predictable. The strongest systems often combine both approaches.
 
 ---
 
