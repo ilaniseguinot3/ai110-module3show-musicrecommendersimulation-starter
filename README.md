@@ -144,25 +144,67 @@ flowchart LR
 
 ## Experiments You Tried
 
-Use this section to document the experiments you ran. For example:
+I tested the recommender with several user profiles to see how the scoring logic behaved under both normal and edge-case conditions.
 
-- What happened when you changed the weight on genre from 2.0 to 0.5
-- What happened when you added tempo or valence to the score
-- How did your system behave for different types of users
+### High-Energy Pop
+```text
+Profile: High-Energy Pop
+
+1. Sunrise City
+   Score: 4.12
+   Why: This song fits because it genre match (+2.0); mood match (+1.0); energy similarity (0.92); lower acousticness.
+
+2. Gym Hero
+   Score: 3.17
+   Why: This song fits because it genre match (+2.0); energy similarity (0.97); lower acousticness.
+```
+
+### Chill Lofi
+```text
+Profile: Chill Lofi
+
+1. Library Rain
+   Score: 4.50
+   Why: This song fits because it genre match (+2.0); mood match (+1.0); energy similarity (1.00); acoustic preference.
+
+2. Midnight Coding
+   Score: 4.43
+   Why: This song fits because it genre match (+2.0); mood match (+1.0); energy similarity (0.93); acoustic preference.
+```
+
+### Deep Intense Rock
+```text
+Profile: Deep Intense Rock
+
+1. Storm Runner
+   Score: 4.16
+   Why: This song fits because it genre match (+2.0); mood match (+1.0); energy similarity (0.96); lower acousticness.
+```
+
+### Conflicting Edge Case
+```text
+Profile: Conflicting Edge Case
+
+1. Gym Hero
+   Score: 3.17
+   Why: This song fits because it genre match (+2.0); energy similarity (0.97); lower acousticness.
+```
 
 ---
 
 ## Limitations and Risks
 
-Summarize some limitations of your recommender.
+This recommender is intentionally simple, so it has a few clear weaknesses.
 
-Examples:
+- It only uses a small set of handcrafted features, so it can miss songs that are musically great but do not share the same labels.
+- The current weighting can over-prioritize genre and mood, which may make the system feel repetitive or too narrow.
+- The dataset is small, so the top results can look overly dependent on a few strong matches rather than a wide variety of songs.
 
-- It only works on a tiny catalog
-- It does not understand lyrics or language
-- It might over favor one genre or mood
+For example, the results for the "High-Energy Pop" and "Conflicting Edge Case" profiles often surface songs that match the preferred genre quickly, even when the mood or energy fit is imperfect. That suggests the current recipe is useful for a first pass, but it could be made more nuanced with additional features or more balanced weights.
 
-You will go deeper on this in your model card.
+### Weight-shift experiment
+
+I tested a small sensitivity change by reducing the genre bonus from +2.0 to +1.0 and doubling the energy contribution. The rankings changed noticeably, especially for the high-energy profiles, but the recommendations did not become clearly more accurate in every case. This suggests the system is sensitive to weighting choices, and that some profiles may need a more carefully tuned balance between genre, mood, and energy.
 
 ---
 
